@@ -1,0 +1,10 @@
+{
+  "java.project.sourcePaths": ["public/java"],
+  "java.project.outputPath": ".vscode/java-bin",
+  "java.project.resourceFilters": [
+    "node_modules",
+    ".git",
+    ".output",
+    ".wrangler"
+  ]
+}

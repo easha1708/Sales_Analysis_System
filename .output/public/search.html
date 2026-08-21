@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search &amp; Analysis | Sales Analysis System</title>
+    <meta
+      name="description"
+      content="Search sales by date range, month, quarter or festival and analyze totals."
+    />
+    <link rel="stylesheet" href="css/search.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">SAS</div>
+          <div>
+            <h1>Sales Analysis</h1>
+            <p>ADMIN PANEL</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="sales-entry.html">Sales Entry</a>
+          <a href="search.html" class="active">Search &amp; Analysis</a>
+          <a href="reports.html">Reports</a>
+          <a href="settings.html">Settings</a>
+          <a href="#" data-logout>Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Search &amp; Analysis</h2>
+            <div class="sub">
+              Date range &bull; Month &bull; Quarter &bull; Festival
+            </div>
+          </div>
+          <div class="user-chip">
+            <span data-admin-name>Administrator</span>
+            <div class="avatar" data-admin-initial>A</div>
+          </div>
+        </header>
+
+        <div class="content">
+          <section class="card">
+            <div class="tabs">
+              <button class="tab active" data-tab="range">Date Range</button>
+              <button class="tab" data-tab="month">Month</button>
+              <button class="tab" data-tab="quarter">Quarter</button>
+              <button class="tab" data-tab="festival">Festival</button>
+            </div>
+
+            <div class="card-body">
+              <!-- Date range -->
+              <div class="panel" id="panel-range">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="fromDate">From Date</label>
+                    <input type="date" id="fromDate" />
+                  </div>
+                  <div class="field">
+                    <label for="toDate">To Date</label>
+                    <input type="date" id="toDate" />
+                  </div>
+                  <div class="field">
+                    <label for="rangeProduct">Product</label>
+                    <select id="rangeProduct"></select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Month -->
+              <div class="panel" id="panel-month" style="display: none">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="monthSel">Month</label>
+                    <select id="monthSel"></select>
+                  </div>
+                  <div class="field">
+                    <label for="monthYear">Year</label>
+                    <select id="monthYear"></select>
+                  </div>
+                  <div class="field">
+                    <label for="monthProduct">Product</label>
+                    <select id="monthProduct"></select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quarter -->
+              <div class="panel" id="panel-quarter" style="display: none">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="quarterSel">Quarter</label>
+                    <select id="quarterSel">
+                      <option value="0">Q1 (January - March)</option>
+                      <option value="1">Q2 (April - June)</option>
+                      <option value="2">Q3 (July - September)</option>
+                      <option value="3">Q4 (October - December)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="quarterYear">Year</label>
+                    <select id="quarterYear"></select>
+                  </div>
+                  <div class="field">
+                    <label for="quarterProduct">Product</label>
+                    <select id="quarterProduct"></select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Festival -->
+              <div class="panel" id="panel-festival" style="display: none">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="festivalSel">Festival</label>
+                    <select id="festivalSel">
+                      <option value="Holi">Holi</option>
+                      <option value="Eid">Eid</option>
+                      <option value="Diwali">Diwali</option>
+                      <option value="Christmas">Christmas</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="festivalYear">Year</label>
+                    <select id="festivalYear"></select>
+                  </div>
+                  <div class="field">
+                    <label for="festivalProduct">Product</label>
+                    <select id="festivalProduct"></select>
+                  </div>
+                </div>
+                <p class="hintline" id="festivalHint"></p>
+              </div>
+
+              <div class="actions no-print">
+                <button id="searchBtn">SEARCH</button>
+                <button class="btn-ghost" id="clearBtn">CLEAR</button>
+                <button class="btn-ghost" id="csvBtn">Export CSV</button>
+                <button class="btn-ghost" onclick="window.print()">
+                  Print
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <div class="grid grid-4" style="margin-top: 18px">
+            <div class="stat">
+              <div class="label">Total Quantity</div>
+              <div class="value" id="sumQty">0</div>
+            </div>
+            <div class="stat green">
+              <div class="label">Total Sales</div>
+              <div class="value" id="sumAmt">&#8377;0</div>
+            </div>
+            <div class="stat navy">
+              <div class="label">Transactions</div>
+              <div class="value" id="sumTxn">0</div>
+            </div>
+            <div class="stat warn">
+              <div class="label">Average Sale</div>
+              <div class="value" id="sumAvg">&#8377;0</div>
+            </div>
+          </div>
+
+          <section class="card" style="margin-top: 18px">
+            <div class="card-head">
+              <h3>Search Result</h3>
+              <span class="hintline" id="resultInfo"
+                >Select a filter and click SEARCH</span
+              >
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th class="num">Quantity</th>
+                    <th>Person Category</th>
+                    <th class="num">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="resultBody">
+                  <tr>
+                    <td colspan="5" class="empty">No search performed yet.</td>
+                  </tr>
+                </tbody>
+                <tfoot id="resultFoot"></tfoot>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-bg" id="confirmModal">
+      <div class="modal">
+        <h3 class="m-title">Confirm</h3>
+        <p class="m-text">Are you sure?</p>
+        <div class="actions">
+          <button class="m-yes btn-danger">Yes, continue</button>
+          <button class="m-no btn-ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="toasts"></div>
+    <script src="js/common.js"></script>
+    <script src="js/search.js"></script>
+  </body>
+</html>

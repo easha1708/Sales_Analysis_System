@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Sales Analysis System</title>
+    <meta
+      name="description"
+      content="Admin dashboard showing today's sales, monthly sales, quantity sold and best selling product."
+    />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">SAS</div>
+          <div>
+            <h1>Sales Analysis</h1>
+            <p>ADMIN PANEL</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard.html" class="active">Dashboard</a>
+          <a href="sales-entry.html">Sales Entry</a>
+          <a href="search.html">Search &amp; Analysis</a>
+          <a href="reports.html">Reports</a>
+          <a href="settings.html">Settings</a>
+          <a href="#" data-logout>Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Dashboard</h2>
+            <div class="sub">
+              Track Sales &bull; Analyze Performance &bull; Generate Reports
+            </div>
+          </div>
+          <div class="user-chip">
+            <span data-admin-name>Administrator</span>
+            <div class="avatar" data-admin-initial>A</div>
+          </div>
+        </header>
+
+        <div class="content">
+          <div class="grid grid-4">
+            <div class="stat">
+              <div class="label">Today's Sales</div>
+              <div class="value" id="cardToday">&#8377;0</div>
+              <div class="hint" id="cardTodayHint">0 transactions today</div>
+            </div>
+            <div class="stat green">
+              <div class="label">Monthly Sales</div>
+              <div class="value" id="cardMonth">&#8377;0</div>
+              <div class="hint" id="cardMonthHint">Current month</div>
+            </div>
+            <div class="stat navy">
+              <div class="label">Quantity Sold</div>
+              <div class="value" id="cardQty">0</div>
+              <div class="hint">All recorded sales</div>
+            </div>
+            <div class="stat warn">
+              <div class="label">Best Product</div>
+              <div class="value" id="cardBest">-</div>
+              <div class="hint" id="cardBestHint">By total sales amount</div>
+            </div>
+          </div>
+
+          <div class="grid grid-2" style="margin-top: 18px">
+            <section class="card">
+              <div class="card-head">
+                <h3>Monthly Sales Trend (Current Year)</h3>
+              </div>
+              <div class="card-body" id="monthBars"></div>
+            </section>
+            <section class="card">
+              <div class="card-head"><h3>Quarterly Summary</h3></div>
+              <div class="card-body table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Quarter</th>
+                      <th>Months</th>
+                      <th class="num">Quantity</th>
+                      <th class="num">Sales</th>
+                    </tr>
+                  </thead>
+                  <tbody id="quarterBody"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <section class="card" style="margin-top: 18px">
+            <div class="card-head">
+              <h3>Recent Sales</h3>
+              <a class="btn btn-ghost btn-sm" href="sales-entry.html"
+                >+ New Sale</a
+              >
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th class="num">Quantity</th>
+                    <th>Person Category</th>
+                    <th class="num">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="recentBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-bg" id="confirmModal">
+      <div class="modal">
+        <h3 class="m-title">Confirm</h3>
+        <p class="m-text">Are you sure?</p>
+        <div class="actions">
+          <button class="m-yes btn-danger">Yes, continue</button>
+          <button class="m-no btn-ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="toasts"></div>
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

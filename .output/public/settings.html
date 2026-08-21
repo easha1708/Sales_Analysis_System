@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings | Sales Analysis System</title>
+    <meta
+      name="description"
+      content="Admin profile settings, change password and logout for the Sales Analysis System."
+    />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">SAS</div>
+          <div>
+            <h1>Sales Analysis</h1>
+            <p>ADMIN PANEL</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="sales-entry.html">Sales Entry</a>
+          <a href="search.html">Search &amp; Analysis</a>
+          <a href="reports.html">Reports</a>
+          <a href="settings.html" class="active">Settings</a>
+          <a href="#" data-logout>Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2>Settings</h2>
+            <div class="sub">Admin profile and password</div>
+          </div>
+          <div class="user-chip">
+            <span data-admin-name>Administrator</span>
+            <div class="avatar" data-admin-initial>A</div>
+          </div>
+        </header>
+
+        <div class="content">
+          <div class="grid grid-2">
+            <section class="card">
+              <div class="card-head"><h3>Admin Profile</h3></div>
+              <div class="card-body">
+                <form id="profileForm" novalidate>
+                  <div class="field" style="margin-bottom: 14px">
+                    <label for="adminName">Admin Name</label>
+                    <input type="text" id="adminName" />
+                    <span class="err" id="errName"></span>
+                  </div>
+                  <div class="field">
+                    <label for="adminEmail">Admin Email</label>
+                    <input type="email" id="adminEmail" />
+                    <span class="err" id="errEmail"></span>
+                  </div>
+                  <div class="actions">
+                    <button type="submit">SAVE PROFILE</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <section class="card">
+              <div class="card-head"><h3>Change Password</h3></div>
+              <div class="card-body">
+                <form id="passwordForm" novalidate>
+                  <div class="field" style="margin-bottom: 14px">
+                    <label for="oldPass">Current Password</label>
+                    <input type="password" id="oldPass" />
+                    <span class="err" id="errOld"></span>
+                  </div>
+                  <div class="field" style="margin-bottom: 14px">
+                    <label for="newPass">New Password</label>
+                    <input type="password" id="newPass" />
+                    <span class="err" id="errNew"></span>
+                  </div>
+                  <div class="field">
+                    <label for="confirmPass">Confirm New Password</label>
+                    <input type="password" id="confirmPass" />
+                    <span class="err" id="errConfirm"></span>
+                  </div>
+                  <div class="actions">
+                    <button type="submit">UPDATE PASSWORD</button>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+
+          <section class="card" style="margin-top: 18px">
+            <div class="card-head"><h3>Session</h3></div>
+            <div class="card-body">
+              <p class="hintline" style="margin-bottom: 14px">
+                Logging out clears the admin session and returns to the login
+                page.
+              </p>
+              <div class="actions" style="margin: 0">
+                <button class="btn-danger" data-logout>LOGOUT</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-bg" id="confirmModal">
+      <div class="modal">
+        <h3 class="m-title">Confirm</h3>
+        <p class="m-text">Are you sure?</p>
+        <div class="actions">
+          <button class="m-yes btn-danger">Yes, continue</button>
+          <button class="m-no btn-ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div id="toasts"></div>
+    <script src="js/common.js"></script>
+    <script src="js/settings.js"></script>
+  </body>
+</html>
